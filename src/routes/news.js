@@ -1,20 +1,19 @@
-// routes/discussions.js
 const express = require('express');
 const router = express.Router();
-const { db, collection, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion } = require('../firebase'); // Use db from firebase.js
+const { db, collection, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion } = require('../firebase');
 
-// GET http://localhost:5000/discussions/posts (fetches all ID, author, date, title, description)
+// GET http://localhost:5000/news/posts (fetches all ID, author, date, title, description)
 router.get('/posts', async (req, res) => {
     try {
-        const querySnapshot = await getDocs(collection(db, "Disc_Posts"));
+        const querySnapshot = await getDocs(collection(db, "News_Posts"));
         const posts = querySnapshot.docs.map(doc => {
             const data = doc.data();
             return {
                 id: doc.id,
-                Author: data.Author,   // Author name
-                Date: data.Date,       // Post date
-                Title: data.Title,      // Post title
-                Description: data.Description // Post description
+                Author: data.Author,
+                Date: data.Date,
+                Title: data.Title,
+                Description: data.Description
             };
         });
         
@@ -25,13 +24,13 @@ router.get('/posts', async (req, res) => {
     }
 });
 
-// GET http://localhost:5000/discussions/post/KuEuWrfkqHDDMpDY1KqH <- fetches a specific post by ID
+// GET http://localhost:5000/news/post/:docId
 router.get('/post/:docId', async (req, res) => {
   try {
     const docId = req.params.docId;
     console.log("Fetching document with ID:", docId);
     
-    const docRef = doc(db, "Disc_Posts", docId);
+    const docRef = doc(db, "News_Posts", docId);
     const docSnap = await getDoc(docRef);
 
     if (!docSnap.exists()) {
@@ -49,7 +48,7 @@ router.get('/post/:docId', async (req, res) => {
   }
 });
 
-// POST http://localhost:5000/discussions/posting
+// POST http://localhost:5000/news/posting
 // Content-Type: application/json
 // 
 // {
@@ -62,27 +61,23 @@ router.get('/post/:docId', async (req, res) => {
 //   "Title": "New Discussion Topic",
 //   "Description": "This is a description of the new discussion topic."
 // }
-
-
 router.post('/posting', async (req, res) => {
   try {
     const { Author, Date, Comments, Title, Description } = req.body;
 
-    // Validate required fields
     if (!Author || !Date || !Title || !Description) {
       return res.status(400).json({ error: "All fields (Author, Date, Title, Description) are required" });
     }
 
-    // Add a new document to the collection
     const newPost = {
       Author,
       Date,
-      Comments: Comments || [], // Use provided Comments array or default to empty array
+      Comments: Comments || [],
       Title,
       Description
     };
 
-    const docRef = await addDoc(collection(db, "Disc_Posts"), newPost);
+    const docRef = await addDoc(collection(db, "News_Posts"), newPost);
 
     res.status(201).json({ message: "Post created successfully", id: docRef.id });
   } catch (error) {
@@ -91,7 +86,7 @@ router.post('/posting', async (req, res) => {
   }
 });
 
-// POST http://localhost:5000/discussions/post/:docId/comment
+// POST http://localhost:5000/news/post/:docId/comment
 router.post('/post/:docId/comment', async (req, res) => {
   try {
     const docId = req.params.docId;
@@ -99,16 +94,16 @@ router.post('/post/:docId/comment', async (req, res) => {
     if (!author || !content || !date) {
       return res.status(400).json({ error: "Author, content, and date are required for comments" });
     }
-    const docRef = doc(db, "Disc_Posts", docId);
+    const docRef = doc(db, "News_Posts", docId);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      return res.status(404).json({ error: "Discussion post not found" });
+      return res.status(404).json({ error: "News post not found" });
     }
     const newComment = {
       author,
       content,
       date,
-      commentId: Date.now().toString() // Unique identifier for the comment
+      commentId: Date.now().toString()
     };
     await updateDoc(docRef, {
       Comments: arrayUnion(newComment)
@@ -122,7 +117,5 @@ router.post('/post/:docId/comment', async (req, res) => {
     res.status(500).json({ error: "Failed to add comment" });
   }
 });
-
-// delete a post by ID (auth)
 
 module.exports = router;

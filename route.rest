@@ -11,3 +11,13 @@ Content-Type: application/json
   "Title": "New Discussion Topic",
   "Description": "This is a description of the new discussion topic."
 }
+
+###
+
+GET http://localhost:5000/news/posts
+Content-Type: application/json
+
+###
+
+GET http://localhost:5000/profile/data
+Content-Type: application/json

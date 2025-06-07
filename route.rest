@@ -17,7 +17,70 @@ Content-Type: application/json
 GET http://localhost:5000/news/posts
 Content-Type: application/json
 
-###
+### get profile data by uid
 
-GET http://localhost:5000/profile/data
+GET http://localhost:5000/profile/data/rWlfhyFwdjb73Zxto0nCFwKAU3A2
 Content-Type: application/json
+
+
+### update profile last_online
+
+PUT http://localhost:5000/profile/update/rWlfhyFwdjb73Zxto0nCFwKAU3A2/last_online
+Content-Type: application/json
+
+{
+  "last_online": "2025-06-08T12:00:00.000Z"
+}
+
+### new profile creation
+
+POST http://localhost:5000/profile/create/rWlfhyFwdjb73Zxto0nCFwKAU3A
+Content-Type: application/json
+
+{
+  "Username": "Testuser123",
+  "Joined": "June 5, 2025 at 1:00:00 AM UTC-7",
+  "Last_online": "June 8, 2025 at 5:00:00 AM UTC-7",
+  "move_list": [950387],
+  "reviews": ["8pYCgaQ0DJYfCGdacqYr"],
+  "Completed": [],
+  "Dropped": [],
+  "On_hold": [],
+  "Plan_to_watch": [],
+  "Rewatched": []
+}
+
+### Add movie to Completed
+
+PUT http://localhost:5000/profile/update/rWlfhyFwdjb73Zxto0nCFwKAU3A2/Completed/add_movie
+Content-Type: application/json
+
+{
+  "movieId": "78901"
+}
+
+### Remove movie from Completed
+
+PUT http://localhost:5000/profile/update/rWlfhyFwdjb73Zxto0nCFwKAU3A2/Completed/remove_movie
+Content-Type: application/json
+
+{
+  "movieId": "78901"
+}
+
+### Add review
+PUT http://localhost:5000/profile/update/rWlfhyFwdjb73Zxto0nCFwKAU3A2/add_review
+Content-Type: application/json
+
+{
+  "reviewId": "anotherReviewId"
+}
+
+### Remove review
+PUT http://localhost:5000/profile/update/rWlfhyFwdjb73Zxto0nCFwKAU3A2/remove_review
+Content-Type: application/json
+
+{
+  "reviewId": "anotherReviewId"
+}
+

@@ -21,3 +21,13 @@ Content-Type: application/json
 
 GET http://localhost:5000/profile/data
 Content-Type: application/json
+
+###
+
+PATCH http://localhost:5000/profile/data/xs43nkIvdKF2sHjDi15u
+Content-Type: application/json
+
+{
+  "Username": "Testuser",
+  "Last_online": "June 5, 2025 at 12:00:00 AM UTC-7"
+}

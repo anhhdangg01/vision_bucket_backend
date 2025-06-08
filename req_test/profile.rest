@@ -1,21 +1,4 @@
-POST http://localhost:5000/news/posting
-Content-Type: application/json
 
-{
-  "Author": "John Doe",
-  "Date": "20250603",
-  "Comments": [
-    {
-    }
-  ],
-  "Title": "New Discussion Topic",
-  "Description": "This is a description of the new discussion topic."
-}
-
-###
-
-GET http://localhost:5000/news/posts
-Content-Type: application/json
 
 ### get profile data by uid
 
@@ -83,4 +66,3 @@ Content-Type: application/json
 {
   "reviewId": "anotherReviewId"
 }
-

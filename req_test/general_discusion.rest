@@ -1,0 +1,38 @@
+GET http://localhost:5000/discussions/posts
+###
+
+POST http://localhost:5000/discussions/posting
+Content-Type: application/json
+
+{
+  "Author": "John Doe",
+  "uid": "KuEuWrfkqHDDMpDY1KqH",
+  "Date": "20250603",
+  "Comments": [
+    {
+    }
+  ],
+  "Title": "New Discussion Topic",
+  "Description": "This is a description of the new discussion topic."
+}
+
+### post a comment to a discussion post
+
+POST http://localhost:5000/discussions/post/4JXBLNoIgwGc279xhvqR/comment
+Content-Type: application/json
+
+{
+  "author": "John Doe",
+  "uid": "KuEuWrfkqHDDMpDY1KqH",
+  "content": "Test comment content",
+  "date": "20250603"
+}
+### delete a comment from a discussion post
+
+DELETE http://localhost:5000/discussions/comment/4JXBLNoIgwGc279xhvqR/1749339986789/KuEuWrfkqHDDMpDY1KqH
+
+### delte a discussion post
+
+DELETE http://localhost:5000/discussions/post/ZFSc5TxDgbFBvryyxGWF/KuEuWrfkqHDDMpDY1KqH
+
+

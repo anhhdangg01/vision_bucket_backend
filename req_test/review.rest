@@ -1,0 +1,26 @@
+### Review Posting API Test
+POST http://localhost:5000/reviews/posting
+Content-Type: application/json
+
+{
+  "movieId": "950387",
+  "Author": "John Doe",
+  "content": "This movie was fantastic! A must-watch for everyone.",
+  "rating": "5",
+  "uid": "KuEuWrfkqHDDMpDY1KqH"
+}
+
+### delte 
+
+DELETE http://localhost:5000/reviews/HiqffYVzvJAw6YjZbHxV/KuEuWrfkqHDDMpDY1KqH
+
+
+### update
+
+PATCH http://localhost:5000/reviews/k2dGWDfMPbGslHqLN6hs/KuEuWrfkqHDDMpDY1KqH
+Content-type: application/json
+
+{
+  "content": "This movie was fantastic! A must-watch for everyone. Updated review.",
+  "rating": "3"
+}

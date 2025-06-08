@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { db, collection, getDocs, query, where, doc, updateDoc, arrayUnion, arrayRemove, setDoc, getDoc } = require('../firebase'); // Use db from firebase.js
+const { db, doc, updateDoc, arrayUnion, arrayRemove, setDoc, getDoc } = require('../firebase'); // Use db from firebase.js
 
 // Middleware to handle errors
 const asyncHandler = fn => (req, res, next) => {
